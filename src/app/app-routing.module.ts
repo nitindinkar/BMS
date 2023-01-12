@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'budget-delete', component: BudgetDeleteComponent },
   { path: 'inbox', component: InboxComponent },
   { path: 'outbox', component: OutboxComponent },
-  { path: 'budget-approver', component: BudgetApproverComponent },
+  { path: 'budget-approval', component: BudgetApproverComponent },
   { path: 'new-contigentbill', component: NewContigentBillComponent },
   { path: 'manage-user', component: ManageUserComponent },
 
