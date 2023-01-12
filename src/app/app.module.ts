@@ -9,6 +9,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BudgetAllocationComponent } from './budget-allocation/budget-allocation.component';
 import { BudgetUpdateComponent } from './budget-update/budget-update.component';
 import { BudgetDeleteComponent } from './budget-delete/budget-delete.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { OutboxComponent } from './outbox/outbox.component';
+import { BudgetApproverComponent } from './budget-approver/budget-approver.component';
+import { LoginComponent } from './login/login.component';
+import { NewContigentBillComponent } from './new-contigent-bill/new-contigent-bill.component';
+import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ContigentBillApproverComponent } from './contigent-bill-approver/contigent-bill-approver.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +25,14 @@ import { BudgetDeleteComponent } from './budget-delete/budget-delete.component';
     DashboardComponent,
     BudgetAllocationComponent,
     BudgetUpdateComponent,
-    BudgetDeleteComponent
+    BudgetDeleteComponent,
+    InboxComponent,
+    OutboxComponent,
+    BudgetApproverComponent,
+    LoginComponent,
+    NewContigentBillComponent,
+    ManageUserComponent,
+    ContigentBillApproverComponent
   ],
   imports: [
     BrowserModule,

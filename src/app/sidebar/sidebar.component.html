@@ -1,21 +1,19 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link main-logo">
-      <img src="assets/img/icg_logo.png" alt="AdminLTE Logo" class="brand-image" width="100px">
+    <a href="#" class="brand-link main-logo" [routerLink]="['/']">
+      <img src="assets/img/icg_logo.png" alt="icg Logo" class="brand-image" width="100px">
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link" [routerLink]="['/']" [routerLinkActive]="['active']">
+           <li class="nav-item">
+            <a href="#" class="nav-link" [routerLink]="['/dashboard']" [routerLinkActive]="['active']">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -23,10 +21,22 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link" >
+            <a href="#" class="nav-link" [routerLink]="['/inbox']" [routerLinkActive]="['active']">
+                <i class="fas fa-inbox nav-icon"></i>
+                <p>Inbox</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" [routerLink]="['/outbox']" [routerLinkActive]="['active']">
+                <i class="fas fa-paper-plane nav-icon"></i>
+                <p>Outbox</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" [routerLinkActive]="['active']">
               <i class="nav-icon fas fa-rupee-sign"></i>
               <p>
-                Budget Manager
+                Budget
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -53,10 +63,23 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+                <i class="fas fa-user-cog nav-icon"></i>
+                <p>Manage Users</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-file-alt nav-icon"></i>
+                <p>New Contigent Bill</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
                 <i class="fas fa-file-download nav-icon"></i>
                 <p>Budget Allocation Report</p>
             </a>
           </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

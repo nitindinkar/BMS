@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
+  ngOnInit(): void {
+    if (!localStorage.getItem("foo")) {
+      localStorage.setItem("foo", "no reload");
+      location.reload();
+    } else {
+      localStorage.removeItem("foo");
+    }
+  }
 }
