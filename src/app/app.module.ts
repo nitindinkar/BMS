@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BudgetAllocationComponent } from './budget-allocation/budget-allocation.component';
+import { BudgetUpdateComponent } from './budget-update/budget-update.component';
+import { BudgetDeleteComponent } from './budget-delete/budget-delete.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { BudgetAllocationComponent } from './budget-allocation/budget-allocation
     HeaderComponent,
     SidebarComponent,
     DashboardComponent,
-    BudgetAllocationComponent
+    BudgetAllocationComponent,
+    BudgetUpdateComponent,
+    BudgetDeleteComponent
   ],
   imports: [
     BrowserModule,
