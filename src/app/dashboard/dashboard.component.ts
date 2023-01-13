@@ -14,7 +14,7 @@ export class DashboardComponent {
     } else {
       localStorage.removeItem('foo');
       console.log('Chauha ');
-      localStorage.setItem('user_role', 'sys_Admin');
+      localStorage.setItem('user_role', 'Admin');
     }
   }
 }

@@ -16,6 +16,8 @@ import { LoginComponent } from './login/login.component';
 import { NewContigentBillComponent } from './new-contigent-bill/new-contigent-bill.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ContigentBillApproverComponent } from './contigent-bill-approver/contigent-bill-approver.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,10 @@ import { ContigentBillApproverComponent } from './contigent-bill-approver/contig
     LoginComponent,
     NewContigentBillComponent,
     ManageUserComponent,
-    ContigentBillApproverComponent
+    ContigentBillApproverComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgSelectModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
