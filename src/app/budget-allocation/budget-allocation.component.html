@@ -99,7 +99,8 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Amount</label>
-                  <input type="number" class="form-control" id="Amount" placeholder="Enter Amount" />
+                  <input type="number" #box class="form-control" id="Amount" placeholder="Enter Amount"
+                    (keyup)="onSearchChange(box.value)" />
                 </div>
               </div>
               <div class="col-md-4">
@@ -125,7 +126,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Balance Fund</label>
-                  <input type="text" class="form-control" id="BalanceFund" readonly value="0" />
+                  <input type="text" class="form-control" id="BalanceFund" readonly value={{balanceFund}} />
                 </div>
               </div>
               <div class="col-md-4">
