@@ -11,9 +11,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./budget-allocation.component.scss'],
 })
 export class BudgetAllocationComponent implements OnInit {
+  selectedProjects: any;
+
   budgetFinYears: any[] = [];
   subHeads: any[] = [];
-  cgUnits: any[] = [];
+  // cgUnits: any[] = [];
   budgetTypes: any[] = [];
   allocationTypes: any[] = [];
   majorHead: any;
@@ -21,10 +23,10 @@ export class BudgetAllocationComponent implements OnInit {
   fundAvailable: any;
   previousAllocation: any;
 
-  // cgUnits = [
-  //   { unit: 456, descr: 'CGIO Okha' },
-  //   { unit: 457, descr: 'ICGS Delhi' },
-  // ];
+  cgUnits = [
+    { unit: 456, descr: 'CGIO Okha' },
+    { unit: 457, descr: 'ICGS Delhi' },
+  ];
 
   constructor(
     private SpinnerService: NgxSpinnerService,

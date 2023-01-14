@@ -18,6 +18,8 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ContigentBillApproverComponent } from './contigent-bill-approver/contigent-bill-approver.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ManageUserComponent,
     ContigentBillApproverComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgSelectModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

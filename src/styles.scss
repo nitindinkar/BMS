@@ -24,3 +24,8 @@
 .mailbox-messages table tr{
 cursor: pointer;
 }
+
+
+.ng-has-value .ng-placeholder {
+    display: none;
+}
