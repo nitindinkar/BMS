@@ -86,4 +86,6 @@ export class BudgetAllocationComponent implements OnInit {
         this.previousAllocation = result['response'].previousAllocation;
       });
   }
+
+  addData() {}
 }
