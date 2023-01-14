@@ -37,13 +37,13 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <form>
+          <form [formGroup]="formdata" (ngSubmit)="addData(formdata.value)">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Financial Year</label>
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="budgetFinYears"
-                    bindLabel="finYear" bindValue="serialNo" placeholder="Select Financial Year" clearAllText="Clear">
+                    bindLabel="finYear" placeholder="Select Financial Year" formControlName="finYearName">
                   </ng-select>
                 </div>
               </div>
@@ -57,25 +57,17 @@
                 <div class="form-group">
                   <label>Sub Head</label>
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="subHeads"
-                    bindLabel="subheadDesc" bindValue="id" (change)="subHeadSelected($event)"
-                    placeholder="Select Sub Head"> </ng-select>
+                    bindLabel="subheadDesc" (change)="subHeadSelected($event)" placeholder="Select Sub Head"
+                    formControlName="subHead" appendTo="body"> </ng-select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>To Unit</label>
-                  <!-- <select class="form-control select2bs4" style="width: 100%">
-                    <option selected="selected">RHQ(W)</option>
-                    <option>RHQ(E)</option>
-                    <option>RHQ(S)</option>
-                  </select> -->
-
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="cgUnits" bindLabel="descr"
-                    bindValue="cbUnit" (change)="getAvailableFund($event)" placeholder="Select To Unit"
-                    [(ngModel)]="selectedProjects" appendTo="body">
+                    (change)="getAvailableFund($event)" placeholder="Select To Unit" appendTo="body"
+                    formControlName="cbUnit">
                   </ng-select>
-
-
                 </div>
               </div>
               <div class="col-md-4">
@@ -100,27 +92,29 @@
                 <div class="form-group">
                   <label>Amount</label>
                   <input type="number" #box class="form-control" id="Amount" placeholder="Enter Amount"
-                    (keyup)="onSearchChange(box.value)" />
+                    (keyup)="onSearchChange(box.value)" formControlName="amount" />
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class=" col-md-4">
                 <div class="form-group">
                   <label>Remarks</label>
-                  <input type="text" class="form-control" id="PrevAllocation" placeholder="Enter Remarks" />
+                  <input type="text" class="form-control" id="PrevAllocation" placeholder="Enter Remarks"
+                    formControlName="remarks" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Budget Type</label>
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="budgetTypes" bindLabel="descr"
-                    bindValue="id" placeholder="Select Budget Type"> </ng-select>
+                    placeholder="Select Budget Type" formControlName="budgetType"> </ng-select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Allocation Type</label>
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationTypes"
-                    bindLabel="allocDesc" bindValue="id" placeholder="Select Allocation Type"></ng-select>
+                    bindLabel="allocDesc" placeholder="Select Allocation Type"
+                    formControlName="allocationType"></ng-select>
                 </div>
               </div>
               <div class="col-md-4">
@@ -130,164 +124,134 @@
                 </div>
               </div>
               <div class="col-md-4">
-                <button type="submit" class="btn btn-primary mr-2" (click)="addData()">Add</button>
+                <!-- <button type="button" class="btn btn-primary mr-2" (click)="addData()">Add</button> -->
+                <button type="submit" class="btn btn-primary mr-2">Add</button>
                 <button type="submit" class="btn btn-danger">Reset</button>
               </div>
               <!-- /.col -->
             </div>
-            <!-- /.row -->
-            <div class="row">
-              <div class="col-sm-12 mt-4">
-                <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox"> All</th>
-                        <th>Batch</th>
-                        <th>F.Y.</th>
-                        <th>Unit</th>
-                        <th>Sub Head</th>
-                        <th>Type</th>
-                        <th>Previous</th>
-                        <th>Amount</th>
-                        <th>Remarks</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>011/2022-23</td>
-                        <td>2022-23</td>
-                        <td>RHQ(W)</td>
-                        <td>Office Expenses</td>
-                        <td>Initial</td>
-                        <td>0</td>
-                        <td>2100000233</td>
-                        <td>CGHQ to RHQ</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>011/2022-23</td>
-                        <td>2022-23</td>
-                        <td>RHQ(W)</td>
-                        <td>Office Expenses</td>
-                        <td>Initial</td>
-                        <td>0</td>
-                        <td>2100000233</td>
-                        <td>CGHQ to RHQ</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>011/2022-23</td>
-                        <td>2022-23</td>
-                        <td>RHQ(W)</td>
-                        <td>Office Expenses</td>
-                        <td>Initial</td>
-                        <td>0</td>
-                        <td>2100000233</td>
-                        <td>CGHQ to RHQ</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>011/2022-23</td>
-                        <td>2022-23</td>
-                        <td>RHQ(W)</td>
-                        <td>Office Expenses</td>
-                        <td>Initial</td>
-                        <td>0</td>
-                        <td>2100000233</td>
-                        <td>CGHQ to RHQ</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
-                      Showing 1 to 10 of 57 entries
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                      <ul class="pagination float-right">
-                        <li class="paginate_button page-item previous disabled" id="example2_previous">
-                          <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-                            class="page-link">Previous</a>
-                        </li>
-                        <li class="paginate_button page-item active">
-                          <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                        </li>
-                        <li class="paginate_button page-item next" id="example2_next">
-                          <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Authority Unit</label>
-                  <select class="form-control select2bs4" style="width: 100%">
-                    <option selected="selected">CGHQ</option>
-                    <option>RHQ(W)</option>
-                    <option>RHQ(S)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Authority</label>
-                  <input type="text" class="form-control" id="BalanceFund" placeholder="Enter Authority" />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Date</label>
-                  <input type="date" class="form-control" id="Date" placeholder="Enter Date" />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Type</label>
-                  <select class="form-control select2bs4" style="width: 100%">
-                    <option selected="selected">Letter</option>
-                    <option>Letter</option>
-                    <option>Letter</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Browse Document</label>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 upldBtn">
-                <button type="submit" class="btn btn-primary">Upload</button>
-              </div>
-            </div>
           </form>
+          <!-- /.row -->
+          <div class="row">
+            <div class="col-sm-12 mt-4">
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Batch</th>
+                      <th>F.Y.</th>
+                      <th>Unit</th>
+                      <th>Sub Head</th>
+                      <th>Bud. Type</th>
+                      <th>All. Type</th>
+                      <th>Previous</th>
+                      <th>Amount</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let newBudgetAllocation of newBudgetAllocationArray">
+
+                      <td>011/2022-23</td>
+                      <td>{{newBudgetAllocation.financialYear}}</td>
+                      <td>{{newBudgetAllocation.unitName}}</td>
+                      <td>{{newBudgetAllocation.subHeadName}}</td>
+                      <td>{{newBudgetAllocation.budgetTypeName}}</td>
+                      <td>{{newBudgetAllocation.allocationTypeName}}</td>
+                      <td>{{newBudgetAllocation.prevAllocationName}}</td>
+                      <td>{{newBudgetAllocation.amount}}</td>
+                      <td>{{newBudgetAllocation.remarks}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="row mt-2">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                    Showing 1 to 10 of 57 entries
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                  <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                    <ul class="pagination float-right">
+                      <li class="paginate_button page-item previous disabled" id="example2_previous">
+                        <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                      </li>
+                      <li class="paginate_button page-item active">
+                        <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                      </li>
+                      <li class="paginate_button page-item">
+                        <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                      </li>
+                      <li class="paginate_button page-item">
+                        <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                      </li>
+                      <li class="paginate_button page-item">
+                        <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                      </li>
+                      <li class="paginate_button page-item">
+                        <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                      </li>
+                      <li class="paginate_button page-item">
+                        <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                      </li>
+                      <li class="paginate_button page-item next" id="example2_next">
+                        <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Authority Unit</label>
+                <select class="form-control select2bs4" style="width: 100%">
+                  <option selected="selected">CGHQ</option>
+                  <option>RHQ(W)</option>
+                  <option>RHQ(S)</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Authority</label>
+                <input type="text" class="form-control" id="BalanceFund" placeholder="Enter Authority" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Date</label>
+                <input type="date" class="form-control" id="Date" placeholder="Enter Date" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Type</label>
+                <select class="form-control select2bs4" style="width: 100%">
+                  <option selected="selected">Letter</option>
+                  <option>Letter</option>
+                  <option>Letter</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Browse Document</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile">
+                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 upldBtn">
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+          </div>
+
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

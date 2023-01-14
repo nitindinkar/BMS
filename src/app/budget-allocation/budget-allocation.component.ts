@@ -5,14 +5,20 @@ import { ConstantsService } from '../services/constants/constants.service';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
 @Component({
   selector: 'app-budget-allocation',
   templateUrl: './budget-allocation.component.html',
   styleUrls: ['./budget-allocation.component.scss'],
 })
 export class BudgetAllocationComponent implements OnInit {
-  selectedProjects: any;
-
   // budgetFinYears: any[] = [];
   // subHeads: any[] = [];
   // cgUnits: any[] = [];
@@ -20,9 +26,15 @@ export class BudgetAllocationComponent implements OnInit {
   // allocationTypes: any[] = [];
   majorHead: any;
   minorHead: any;
-  fundAvailable: any;
-  previousAllocation: any;
+  fundAvailable: any = 100003;
+  previousAllocation: any = 2000;
+
   balanceFund: any;
+
+  //for the new table entries
+  newBudgetAllocationList: any[] = [];
+
+  newBudgetAllocationArray: any[] = [];
 
   budgetFinYears = [
     { serialNo: 1, finYear: '2020-2021' },
@@ -68,10 +80,22 @@ export class BudgetAllocationComponent implements OnInit {
     { id: 3, allocDesc: 'demo3' },
   ];
 
+  formdata = new FormGroup({
+    finYearName: new FormControl(), //
+    subHead: new FormControl(), //
+    cbUnit: new FormControl(), //
+    prevAllocation: new FormControl(this.previousAllocation),
+    amount: new FormControl(),
+    remarks: new FormControl(),
+    budgetType: new FormControl(), //
+    allocationType: new FormControl(), //
+  });
+
   constructor(
     private SpinnerService: NgxSpinnerService,
     private cons: ConstantsService,
-    private apiService: ApiCallingServiceService
+    private apiService: ApiCallingServiceService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -115,8 +139,6 @@ export class BudgetAllocationComponent implements OnInit {
 
   getAvailableFund(cgUnit: any) {
     // Only for demo
-    this.fundAvailable = '10000';
-    this.previousAllocation = '2000';
 
     // Only for demo
     this.SpinnerService.show();
@@ -133,7 +155,39 @@ export class BudgetAllocationComponent implements OnInit {
       });
   }
 
-  addData() {}
+  addData(data: any) {
+    // console.log(
+    //   'Values come form table === ' +
+    //     this.newBudgetAllocationForm.controls['cbUnit'].value.descr
+    // );
+    // console.log(
+    //   'Values come form table === ' +
+    //     this.newBudgetAllocationForm.controls['amount'].value
+    // );
+    this.newBudgetAllocationList.push(data);
+    this.showList();
+  }
+  showList() {
+    debugger;
+    this.newBudgetAllocationArray = [];
+    for (var i = 0; i < this.newBudgetAllocationList.length; i++) {
+      var unitIndex = this.cgUnits.findIndex(
+        (a: { unit: any }) => a.unit == this.newBudgetAllocationList[i].cbUnit
+      );
+      console.log('index == ' + unitIndex);
+      this.newBudgetAllocationArray.push({
+        financialYear: this.newBudgetAllocationList[i].finYearName.finYear,
+        unitName: this.newBudgetAllocationList[i].cbUnit.descr,
+        subHeadName: this.newBudgetAllocationList[i].subHead.subheadDesc,
+        budgetTypeName: this.newBudgetAllocationList[i].budgetType.descr,
+        allocationTypeName:
+          this.newBudgetAllocationList[i].allocationType.allocDesc,
+        prevAllocationName: this.newBudgetAllocationList[i].prevAllocation,
+        amount: this.newBudgetAllocationList[i].amount,
+        remarks: this.newBudgetAllocationList[i].remarks,
+      });
+    }
+  }
 
   onSearchChange(searchValue: string): void {
     if (Number(searchValue) > this.fundAvailable) {
