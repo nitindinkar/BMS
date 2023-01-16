@@ -20,9 +20,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+=======
+import { BudgetAllocationReportComponent } from './budget-allocation-report/budget-allocation-report.component';
+>>>>>>> 06d4092773ab0abc2c453fe6635cf67832a3cf98
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewContigentBillComponent,
     ManageUserComponent,
     ContigentBillApproverComponent,
+    BudgetAllocationReportComponent,
   ],
   imports: [
     BrowserModule,

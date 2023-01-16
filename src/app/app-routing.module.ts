@@ -10,6 +10,9 @@ import { BudgetApproverComponent } from './budget-approver/budget-approver.compo
 import { LoginComponent } from './login/login.component';
 import { NewContigentBillComponent } from './new-contigent-bill/new-contigent-bill.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { BudgetAllocationReportComponent } from './budget-allocation-report/budget-allocation-report.component';
+import { ContigentBillApproverComponent } from './contigent-bill-approver/contigent-bill-approver.component';
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -19,8 +22,10 @@ const routes: Routes = [
   { path: 'inbox', component: InboxComponent },
   { path: 'outbox', component: OutboxComponent },
   { path: 'budget-approval', component: BudgetApproverComponent },
-  { path: 'new-contigentbill', component: NewContigentBillComponent },
+  { path: 'new-contigent-bill', component: NewContigentBillComponent },
   { path: 'manage-user', component: ManageUserComponent },
+  { path: 'contigent-bill-aprover', component: ContigentBillApproverComponent },
+
 
 ];
 

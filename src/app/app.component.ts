@@ -12,4 +12,5 @@ export class AppComponent {
   showHideNav(event:any){
     this.isShow= !(event instanceof LoginComponent);
   }
+  
 }
