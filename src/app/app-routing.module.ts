@@ -10,6 +10,8 @@ import { BudgetApproverComponent } from './budget-approver/budget-approver.compo
 import { LoginComponent } from './login/login.component';
 import { NewContigentBillComponent } from './new-contigent-bill/new-contigent-bill.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { BudgetAllocationReportComponent } from './budget-allocation-report/budget-allocation-report.component';
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'budget-approval', component: BudgetApproverComponent },
   { path: 'new-contigentbill', component: NewContigentBillComponent },
   { path: 'manage-user', component: ManageUserComponent },
+  { path: 'budget-allocation-report', component: BudgetAllocationReportComponent },
+
 
 ];
 

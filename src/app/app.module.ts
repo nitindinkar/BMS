@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BudgetAllocationReportComponent } from './budget-allocation-report/budget-allocation-report.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewContigentBillComponent,
     ManageUserComponent,
     ContigentBillApproverComponent,
+    BudgetAllocationReportComponent,
   ],
   imports: [
     BrowserModule,
