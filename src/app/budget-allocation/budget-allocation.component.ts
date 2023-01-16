@@ -3,7 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { ConstantsService } from '../services/constants/constants.service';
 
+import { CommonService } from '../services/common/common.service';
+
 import { NgxSpinnerService } from 'ngx-spinner';
+
+import Swal from 'sweetalert2';
 
 import {
   FormArray,
@@ -19,66 +23,77 @@ import {
   styleUrls: ['./budget-allocation.component.scss'],
 })
 export class BudgetAllocationComponent implements OnInit {
-  // budgetFinYears: any[] = [];
-  // subHeads: any[] = [];
-  // cgUnits: any[] = [];
-  // budgetTypes: any[] = [];
-  // allocationTypes: any[] = [];
+  budgetFinYears: any[] = [];
+  subHeads: any[] = [];
+  cgUnits: any[] = [];
+  budgetTypes: any[] = [];
+  allocationTypes: any[] = [];
+  allocationAuthorityUnits: any[] = [];
+  authorityTypes: any[] = [];
   majorHead: any;
   minorHead: any;
-  fundAvailable: any = 100003;
-  previousAllocation: any = 2000;
+  fundAvailable: any = 0;
+  previousAllocation: any = 0;
+
+  uploadFileResponse: any;
+
+  p: number = 1;
+  length: number = 0;
 
   balanceFund: any;
 
   //for the new table entries
   newBudgetAllocationList: any[] = [];
+  saveBudgetDataList: any[] = [];
+  newBudgetDataSaveList: any[] = [];
 
   newBudgetAllocationArray: any[] = [];
 
-  budgetFinYears = [
-    { serialNo: 1, finYear: '2020-2021' },
-    { serialNo: 2, finYear: '2021-2022' },
-    { serialNo: 3, finYear: '2022-2023' },
-  ];
+  submitJson: any;
 
-  subHeads = [
-    {
-      id: 1,
-      subheadDesc: 'Office Convinece',
-      majorHead: '123',
-      minorHead: '123',
-    },
-    {
-      id: 2,
-      subheadDesc: 'Room Convinece',
-      majorHead: '123',
-      minorHead: '123',
-    },
-    {
-      id: 3,
-      subheadDesc: 'Party Convinece',
-      majorHead: '123',
-      minorHead: '123',
-    },
-  ];
+  // budgetFinYears = [
+  //   { serialNo: 1, finYear: '2020-2021' },
+  //   { serialNo: 2, finYear: '2021-2022' },
+  //   { serialNo: 3, finYear: '2022-2023' },
+  // ];
 
-  cgUnits = [
-    { unit: 456, descr: 'CGIO Okha' },
-    { unit: 457, descr: 'ICGS Delhi' },
-  ];
+  // subHeads = [
+  //   {
+  //     id: 1,
+  //     subheadDesc: 'Office Convinece',
+  //     majorHead: '123',
+  //     minorHead: '123',
+  //   },
+  //   {
+  //     id: 2,
+  //     subheadDesc: 'Room Convinece',
+  //     majorHead: '123',
+  //     minorHead: '123',
+  //   },
+  //   {
+  //     id: 3,
+  //     subheadDesc: 'Party Convinece',
+  //     majorHead: '123',
+  //     minorHead: '123',
+  //   },
+  // ];
 
-  budgetTypes = [
-    { id: 1, descr: 'demo1' },
-    { id: 2, descr: 'demo2' },
-    { id: 3, descr: 'demo3' },
-  ];
+  // cgUnits = [
+  //   { unit: 456, descr: 'CGIO Okha' },
+  //   { unit: 457, descr: 'ICGS Delhi' },
+  // ];
 
-  allocationTypes = [
-    { id: 1, allocDesc: 'demo1' },
-    { id: 2, allocDesc: 'demo2' },
-    { id: 3, allocDesc: 'demo3' },
-  ];
+  // budgetTypes = [
+  //   { id: 1, descr: 'demo1' },
+  //   { id: 2, descr: 'demo2' },
+  //   { id: 3, descr: 'demo3' },
+  // ];
+
+  // allocationTypes = [
+  //   { id: 1, allocDesc: 'demo1' },
+  //   { id: 2, allocDesc: 'demo2' },
+  //   { id: 3, allocDesc: 'demo3' },
+  // ];
 
   formdata = new FormGroup({
     finYearName: new FormControl(), //
@@ -91,11 +106,19 @@ export class BudgetAllocationComponent implements OnInit {
     allocationType: new FormControl(), //
   });
 
+  saveBudgetData = new FormGroup({
+    allocationAuthorityUnits: new FormControl(),
+    authorityTypes: new FormControl(),
+    authorityName: new FormControl(),
+    budgetDate: new FormControl(),
+  });
+
   constructor(
     private SpinnerService: NgxSpinnerService,
     private cons: ConstantsService,
     private apiService: ApiCallingServiceService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private common: CommonService
   ) {}
 
   ngOnInit(): void {
@@ -123,6 +146,10 @@ export class BudgetAllocationComponent implements OnInit {
         this.cgUnits = result['response'].cgUnitData;
         this.budgetTypes = result['response'].budgetTypeData;
         this.allocationTypes = result['response'].allocationTypeData;
+
+        this.allocationAuthorityUnits =
+          result['response'].allocationAuthorityUnits;
+        this.authorityTypes = result['response'].authorityTypes;
 
         console.log('data === ' + this.cgUnits[0].unit);
       });
@@ -168,9 +195,10 @@ export class BudgetAllocationComponent implements OnInit {
     this.showList();
   }
   showList() {
-    debugger;
     this.newBudgetAllocationArray = [];
     for (var i = 0; i < this.newBudgetAllocationList.length; i++) {
+      this.length = this.newBudgetAllocationList.length;
+
       var unitIndex = this.cgUnits.findIndex(
         (a: { unit: any }) => a.unit == this.newBudgetAllocationList[i].cbUnit
       );
@@ -195,5 +223,113 @@ export class BudgetAllocationComponent implements OnInit {
     } else {
       this.balanceFund = Number(this.fundAvailable) - Number(searchValue);
     }
+  }
+
+  file: any;
+
+  onChangeFile(event: any) {
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+    }
+  }
+
+  uploadFile() {
+    const formData = new FormData();
+    formData.append('pet1', this.file);
+
+    this.SpinnerService.show();
+
+    this.apiService.postApi(this.cons.api.fileUpload, formData).subscribe({
+      next: (v: object) => {
+        this.SpinnerService.hide();
+        let result: { [key: string]: any } = v;
+
+        if (result['message'] == 'success') {
+          // this.newSubcList = [];
+          this.uploadFileResponse = '';
+          // this.newSubcArr = [];
+          this.uploadFileResponse = result['response'];
+          console.log(
+            'upload file data ======= ' +
+              JSON.stringify(this.uploadFileResponse) +
+              ' =submitJson'
+          );
+          this.common.successAlert(
+            'Success',
+            result['response']['msg'],
+            'success'
+          );
+        } else {
+          this.common.faliureAlert('Please try later', result['message'], '');
+        }
+      },
+      error: (e) => {
+        this.SpinnerService.hide();
+        console.error(e);
+        this.common.faliureAlert('Error', e['error']['message'], 'error');
+      },
+      complete: () => console.info('complete'),
+    });
+  }
+
+  saveBudgetDataFn(data: any) {
+    // saveBudgetDataList: any[] = [];
+    // newBudgetDataSaveList: any[] = [];
+
+    this.saveBudgetDataList.push(data);
+
+    var newBudgetAllocationListSubArray = [];
+
+    for (var i = 0; i < this.newBudgetAllocationList.length; i++) {
+      newBudgetAllocationListSubArray.push({
+        budgetFinanciaYearId:
+          this.newBudgetAllocationList[i].finYearName.serialNo,
+        budgetBatchNo: '001',
+        toUnitId: this.newBudgetAllocationList[i].cbUnit.cbUnit,
+        subHeadId: this.newBudgetAllocationList[i].subHead.id,
+        amount: this.newBudgetAllocationList[i].amount,
+        remark: this.newBudgetAllocationList[i].remarks,
+        budgetTypeId: this.newBudgetAllocationList[i].budgetType.id,
+        allocationTypeId: this.newBudgetAllocationList[i].allocationType.id,
+      });
+
+      this.submitJson = {
+        listData: newBudgetAllocationListSubArray,
+        docTypeId: this.uploadFileResponse,
+        authorityUnit: data.authorityName,
+        authorityRemark: 'kya hai ye',
+        date: data.budgetDate,
+        authroityTypeId: data.allocationAuthorityUnits.allocationAuthorityUnit,
+      };
+
+      debugger;
+    }
+
+    // newBudgetDataSaveList
+
+    this.confirmModel(this.submitJson);
+  }
+
+  confirmModel(submitJsonArgs: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.finallySubmit(submitJsonArgs);
+      }
+    });
+  }
+
+  finallySubmit(submitJsonArgs: any) {
+    console.log(
+      JSON.stringify(submitJsonArgs) + ' =submitJson for save budget'
+    );
+    this.common.successAlert('Success', 'Finally submitted', 'success');
   }
 }

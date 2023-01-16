@@ -58,15 +58,14 @@
                   <label>Sub Head</label>
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="subHeads"
                     bindLabel="subheadDesc" (change)="subHeadSelected($event)" placeholder="Select Sub Head"
-                    formControlName="subHead" appendTo="body"> </ng-select>
+                    formControlName="subHead"> </ng-select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>To Unit</label>
                   <ng-select class="form-control select2bs4" style="width: 100%" [items]="cgUnits" bindLabel="descr"
-                    (change)="getAvailableFund($event)" placeholder="Select To Unit" appendTo="body"
-                    formControlName="cbUnit">
+                    (change)="getAvailableFund($event)" placeholder="Select To Unit" formControlName="cbUnit">
                   </ng-select>
                 </div>
               </div>
@@ -150,7 +149,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let newBudgetAllocation of newBudgetAllocationArray">
+                    <tr
+                      *ngFor="let newBudgetAllocation of newBudgetAllocationArray  | paginate :{itemsPerPage:10,currentPage:p};">
 
                       <td>011/2022-23</td>
                       <td>{{newBudgetAllocation.financialYear}}</td>
@@ -165,100 +165,81 @@
 
                   </tbody>
                 </table>
+
               </div>
               <div class="row mt-2">
-                <div class="col-sm-12 col-md-5">
+                <!-- <div class="col-sm-12 col-md-5">
                   <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
-                    Showing 1 to 10 of 57 entries
+                    Showing 1 to 10 of {{length}} entries
                   </div>
-                </div>
-                <div class="col-sm-12 col-md-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                    <ul class="pagination float-right">
-                      <li class="paginate_button page-item previous disabled" id="example2_previous">
-                        <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                      </li>
-                      <li class="paginate_button page-item active">
-                        <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                      </li>
-                      <li class="paginate_button page-item">
-                        <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                      </li>
-                      <li class="paginate_button page-item">
-                        <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                      </li>
-                      <li class="paginate_button page-item">
-                        <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                      </li>
-                      <li class="paginate_button page-item">
-                        <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                      </li>
-                      <li class="paginate_button page-item">
-                        <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                      </li>
-                      <li class="paginate_button page-item next" id="example2_next">
-                        <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Authority Unit</label>
-                <select class="form-control select2bs4" style="width: 100%">
-                  <option selected="selected">CGHQ</option>
-                  <option>RHQ(W)</option>
-                  <option>RHQ(S)</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Authority</label>
-                <input type="text" class="form-control" id="BalanceFund" placeholder="Enter Authority" />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Date</label>
-                <input type="date" class="form-control" id="Date" placeholder="Enter Date" />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Type</label>
-                <select class="form-control select2bs4" style="width: 100%">
-                  <option selected="selected">Letter</option>
-                  <option>Letter</option>
-                  <option>Letter</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Browse Document</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile">
-                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 upldBtn">
-              <button type="submit" class="btn btn-primary">Upload</button>
-            </div>
-          </div>
+                </div> -->
 
+
+                <div class="col-sm-12 col-md-12">
+                  <pagination-controls (pageChange)="p = $event" class="pagination float-right"></pagination-controls>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="saveBudgetData">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Authority Unit</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationAuthorityUnits"
+                    bindLabel="allocType" placeholder="Select Authority Unit"
+                    formControlName="allocationAuthorityUnits">
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Authority</label>
+                  <input type="text" class="form-control" id="BalanceFund" placeholder="Enter Authority"
+                    formControlName="authorityName" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Date</label>
+                  <input type="date" class="form-control" id="Date" placeholder="Enter Date"
+                    formControlName="budgetDate" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Type</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="authorityTypes"
+                    bindLabel="allocType" placeholder="Select Type" formControlName="authorityTypes">
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Browse Document</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile" (change)="onChangeFile($event)">
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 upldBtn">
+                <button type="submit" class="btn btn-primary" (click)="uploadFile()">Upload</button>
+              </div>
+            </div>
+          </form>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
           <div class="row">
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <button type="submit" class="btn btn-primary mr-2"
+              (click)="saveBudgetDataFn(saveBudgetData.value)">Submit</button>
           </div>
         </div>
+
+
+
       </div>
       <!-- /.row -->
     </div>
