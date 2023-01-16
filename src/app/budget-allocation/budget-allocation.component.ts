@@ -295,14 +295,13 @@ export class BudgetAllocationComponent implements OnInit {
 
       this.submitJson = {
         listData: newBudgetAllocationListSubArray,
-        docTypeId: this.uploadFileResponse,
+        docTypeId: this.uploadFileResponse.uploadDocId,
         authorityUnit: data.authorityName,
         authorityRemark: 'kya hai ye',
-        date: data.budgetDate,
+        date: '1245857463636',
+        // date: data.budgetDate,
         authroityTypeId: data.allocationAuthorityUnits.allocationAuthorityUnit,
       };
-
-      debugger;
     }
 
     // newBudgetDataSaveList
@@ -330,6 +329,38 @@ export class BudgetAllocationComponent implements OnInit {
     console.log(
       JSON.stringify(submitJsonArgs) + ' =submitJson for save budget'
     );
-    this.common.successAlert('Success', 'Finally submitted', 'success');
+
+    this.SpinnerService.show();
+    this.apiService
+      .postApi(this.cons.api.saveBudgetAllocation, submitJsonArgs)
+      .subscribe({
+        next: (v: object) => {
+          this.SpinnerService.hide();
+          let result: { [key: string]: any } = v;
+
+          // console.log(JSON.stringify(result) + " =submitJson");
+
+          debugger;
+          if (result['message'] == 'success') {
+            // this.newSubcList = [];
+            // this.newSubcArr = [];
+            this.common.successAlert(
+              'Success',
+              result['response']['msg'],
+              'success'
+            );
+          } else {
+            this.common.faliureAlert('Please try later', result['message'], '');
+          }
+        },
+        error: (e) => {
+          this.SpinnerService.hide();
+          console.error(e);
+          this.common.faliureAlert('Error', e['error']['message'], 'error');
+        },
+        complete: () => console.info('complete'),
+      });
+
+    // this.common.successAlert('Success', 'Finally submitted', 'success');
   }
 }
