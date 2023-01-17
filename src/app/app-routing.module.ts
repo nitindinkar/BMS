@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'outbox', component: OutboxComponent },
   { path: 'budget-approval', component: BudgetApproverComponent },
   { path: 'new-contigent-bill', component: NewContigentBillComponent },
-  { path: 'manage-user', component: ManageUserComponent },
+  { path: 'manage-users', component: ManageUserComponent },
   { path: 'budget-allocation-report', component: BudgetAllocationReportComponent },
   { path: 'contigent-bill-aprover', component: ContigentBillApproverComponent },
 
