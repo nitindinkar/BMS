@@ -3055,8 +3055,6 @@
 }));
 //# sourceMappingURL=adminlte.js.map
 
-<<<<<<< HEAD
-
 
 $(document).ready(function(){
 
@@ -3065,12 +3063,4 @@ $(document).ready(function(){
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
   });
-=======
-$(document).ready(function(){
 
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-});
->>>>>>> 06d4092773ab0abc2c453fe6635cf67832a3cf98

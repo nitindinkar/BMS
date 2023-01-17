@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'budget-approval', component: BudgetApproverComponent },
   { path: 'new-contigent-bill', component: NewContigentBillComponent },
   { path: 'manage-user', component: ManageUserComponent },
+  { path: 'budget-allocation-report', component: BudgetAllocationReportComponent },
   { path: 'contigent-bill-aprover', component: ContigentBillApproverComponent },
 
 
