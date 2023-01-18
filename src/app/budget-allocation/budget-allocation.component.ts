@@ -292,15 +292,15 @@ export class BudgetAllocationComponent implements OnInit {
         budgetTypeId: this.newBudgetAllocationList[i].budgetType.id,
         allocationTypeId: this.newBudgetAllocationList[i].allocationType.id,
       });
-      debugger;
       this.submitJson = {
         listData: newBudgetAllocationListSubArray,
         docTypeId: this.uploadFileResponse.uploadDocId,
         authorityUnit: data.authorityName,
         authorityRemark: 'kya hai ye',
-        date: '1245857463636',
-        // date: data.budgetDate,
-        authroityTypeId: data.allocationAuthorityUnits.cbUnit,
+        // date: '1245857463636',
+        date: data.budgetDate,
+        authroityTypeId: data.authorityTypes.authorityTypeId,
+        fromUnitId: data.allocationAuthorityUnits.cbUnit,
       };
 
       // var submitJson = {
@@ -344,7 +344,6 @@ export class BudgetAllocationComponent implements OnInit {
 
           // console.log(JSON.stringify(result) + " =submitJson");
 
-          debugger;
           if (result['message'] == 'success') {
             // this.newSubcList = [];
             // this.newSubcArr = [];

@@ -10,7 +10,7 @@ export class ApiCallingServiceService {
   constructor(private http: HttpClient) {}
 
   postApi(url: any, jsonPayload: any) {
-    console.log(JSON.stringify(jsonPayload) + ' jsonPayload ' + url);
+    // console.log(JSON.stringify(jsonPayload) + ' jsonPayload ' + url);
     return this.http.post(url, jsonPayload).pipe(
       map((results) => results),
       catchError(this.handleError)
