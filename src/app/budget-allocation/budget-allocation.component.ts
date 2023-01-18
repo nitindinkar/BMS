@@ -292,62 +292,28 @@ export class BudgetAllocationComponent implements OnInit {
         budgetTypeId: this.newBudgetAllocationList[i].budgetType.id,
         allocationTypeId: this.newBudgetAllocationList[i].allocationType.id,
       });
-
-      // var submitJson = {
-      //   listData: newBudgetAllocationListSubArray,
-      //   docTypeId: this.uploadFileResponse.uploadDocId,
-      //   authorityUnit: data.authorityName,
-      //   authorityRemark: 'kya hai ye',
-      //   date: '1245857463636',
-      //   // date: data.budgetDate,
-      //   // authroityTypeId: data.allocationAuthorityUnits.allocationAuthorityUnit,
-      // };
-
-      var submitJson = {
-        authorityUnit: 'Diwakar',
+      debugger;
+      this.submitJson = {
+        listData: newBudgetAllocationListSubArray,
+        docTypeId: this.uploadFileResponse.uploadDocId,
+        authorityUnit: data.authorityName,
+        authorityRemark: 'kya hai ye',
+        date: '1245857463636',
+        // date: data.budgetDate,
+        authroityTypeId: data.allocationAuthorityUnits.cbUnit,
       };
 
-      this.apiService
-        .postApi(this.cons.api.saveBudgetAllocation, submitJson)
-        .subscribe({
-          next: (v: object) => {
-            this.SpinnerService.hide();
-            let result: { [key: string]: any } = v;
-
-            // console.log(JSON.stringify(result) + " =submitJson");
-
-            debugger;
-            if (result['message'] == 'success') {
-              // this.newSubcList = [];
-              // this.newSubcArr = [];
-              this.common.successAlert(
-                'Success',
-                result['response']['msg'],
-                'success'
-              );
-            } else {
-              this.common.faliureAlert(
-                'Please try later',
-                result['message'],
-                ''
-              );
-            }
-          },
-          error: (e) => {
-            this.SpinnerService.hide();
-            console.error(e);
-            this.common.faliureAlert('Error', e['error']['message'], 'error');
-          },
-          complete: () => console.info('complete'),
-        });
+      // var submitJson = {
+      //   authorityUnit: 'Diwakar',
+      // };
     }
 
     // newBudgetDataSaveList
 
-    // this.confirmModel();
+    this.confirmModel(this.submitJson);
   }
 
-  confirmModel() {
+  confirmModel(data: any) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -355,24 +321,22 @@ export class BudgetAllocationComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, submit it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.finallySubmit();
+        this.finallySubmit(this.submitJson);
       }
     });
   }
 
-  finallySubmit() {
+  finallySubmit(data: any) {
     this.SpinnerService.show();
     // var newSubmitJson = this.submitJson;
-    var newSubmitJson = {
-      authorityUnit: 'Diwakar',
-    };
+    var newSubmitJson = data;
     console.log(JSON.stringify(newSubmitJson) + ' =submitJson for save budget');
 
     this.apiService
-      .newpostApi(this.cons.api.saveBudgetAllocation, newSubmitJson)
+      .postApi(this.cons.api.saveBudgetAllocation, newSubmitJson)
       .subscribe({
         next: (v: object) => {
           this.SpinnerService.hide();
