@@ -110,18 +110,18 @@ getAvailableFund(cgUnit: any) {
   // Only for demo
 
   // Only for demo
-  this.SpinnerService.show();
-  var comboJson = null;
-  console.log(JSON.stringify(comboJson) + ' ======');
-  this.apiService
-    .getApi(this.cons.api.getAvailableFund + '/' + cgUnit.cbUnit)
-    .subscribe((res) => {
-      this.SpinnerService.hide();
-      let result: { [key: string]: any } = res;
+  // this.SpinnerService.show();
+  // var comboJson = null;
+  // console.log(JSON.stringify(comboJson) + ' ======');
+  // this.apiService
+  //   .getApi(this.cons.api.getAvailableFund + '/' + cgUnit.cbUnit)
+  //   .subscribe((res) => {
+  //     this.SpinnerService.hide();
+  //     let result: { [key: string]: any } = res;
 
-      this.fundAvailable = result['response'].fundAvailable;
-      this.previousAllocation = result['response'].previousAllocation;
-    });
+  //     this.fundAvailable = result['response'].fundAvailable;
+  //     this.previousAllocation = result['response'].previousAllocation;
+  //   });
 }
 addData(data: any) {
   // console.log(
