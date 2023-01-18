@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,23 @@ export class ApiCallingServiceService {
   constructor(private http: HttpClient) {}
 
   postApi(url: any, jsonPayload: any) {
-    //console.log(JSON.stringify(jsonPayload) + " jsonPayload " + url);
+    console.log(JSON.stringify(jsonPayload) + ' jsonPayload ' + url);
     return this.http.post(url, jsonPayload).pipe(
+      map((results) => results),
+      catchError(this.handleError)
+    );
+  }
+
+  newpostApi(url: any, jsonPayload: any): Observable<Object> {
+    const headers = new HttpHeaders().set('authorityUnit', 'demo');
+    //console.log(JSON.stringify(jsonPayload) + " jsonPayload " + url);
+
+    // const headers = new HttpHeaders({
+    //   authorityUnit: 'demo',
+    // });
+
+    console.log(JSON.stringify(jsonPayload) + ' jsonPayload ' + url);
+    return this.http.post(url, JSON.stringify(jsonPayload)).pipe(
       map((results) => results),
       catchError(this.handleError)
     );

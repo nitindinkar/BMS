@@ -292,7 +292,7 @@ export class BudgetAllocationComponent implements OnInit {
         budgetTypeId: this.newBudgetAllocationList[i].budgetType.id,
         allocationTypeId: this.newBudgetAllocationList[i].allocationType.id,
       });
-
+      debugger;
       this.submitJson = {
         listData: newBudgetAllocationListSubArray,
         docTypeId: this.uploadFileResponse.uploadDocId,
@@ -300,8 +300,12 @@ export class BudgetAllocationComponent implements OnInit {
         authorityRemark: 'kya hai ye',
         date: '1245857463636',
         // date: data.budgetDate,
-        authroityTypeId: data.allocationAuthorityUnits.allocationAuthorityUnit,
+        authroityTypeId: data.allocationAuthorityUnits.cbUnit,
       };
+
+      // var submitJson = {
+      //   authorityUnit: 'Diwakar',
+      // };
     }
 
     // newBudgetDataSaveList
@@ -309,7 +313,7 @@ export class BudgetAllocationComponent implements OnInit {
     this.confirmModel(this.submitJson);
   }
 
-  confirmModel(submitJsonArgs: any) {
+  confirmModel(data: any) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -317,22 +321,22 @@ export class BudgetAllocationComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, submit it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.finallySubmit(submitJsonArgs);
+        this.finallySubmit(this.submitJson);
       }
     });
   }
 
-  finallySubmit(submitJsonArgs: any) {
-    console.log(
-      JSON.stringify(submitJsonArgs) + ' =submitJson for save budget'
-    );
-
+  finallySubmit(data: any) {
     this.SpinnerService.show();
+    // var newSubmitJson = this.submitJson;
+    var newSubmitJson = data;
+    console.log(JSON.stringify(newSubmitJson) + ' =submitJson for save budget');
+
     this.apiService
-      .postApi(this.cons.api.saveBudgetAllocation, submitJsonArgs)
+      .postApi(this.cons.api.saveBudgetAllocation, newSubmitJson)
       .subscribe({
         next: (v: object) => {
           this.SpinnerService.hide();

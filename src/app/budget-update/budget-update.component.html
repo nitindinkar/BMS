@@ -46,21 +46,17 @@
                     <div class="col-md-4">
                         <div class="form-group">
                           <label>Financial Year</label>
-                          <select class="form-control select2bs4" style="width: 100%">
-                            <option selected="selected">2022-23</option>
-                            <option>2021-22</option>
-                            <option>2020-21</option>
-                          </select>
+                          <ng-select class="form-control select2bs4" style="width: 100%" [items]="budgetFinYears"
+                    bindLabel="finYear" placeholder="Select Financial Year" formControlName="finYearName" (change)="inputFinYear($event)">
+                  </ng-select>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label>To Unit</label>
-                          <select class="form-control select2bs4" style="width: 100%">
-                            <option selected="selected">RHQ(W)</option>
-                            <option>RHQ(E)</option>
-                            <option>RHQ(S)</option>
-                          </select>
+                          <ng-select class="form-control select2bs4" style="width: 100%" [items]="cgUnits" bindLabel="descr"
+                     placeholder="Select To Unit" formControlName="cbUnit" (change)="getBudgetByUnitAndFinYear($event)">
+                  </ng-select>
                         </div>
                       </div>
                 </div>
@@ -242,66 +238,43 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Major Head</label>
-                    <select class="form-control select2bs4" style="width: 100%">
-                      <option selected="selected">2037</option>
-                      <option>2036</option>
-                      <option>2035</option>
-                    </select>
+                    <input type="number" class="form-control" id="fundAvailable" readonly value={{majorHead}} />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Sub Head</label>
-                    <select class="form-control select2bs4" style="width: 100%">
-                      <option selected="selected">Office Expenses</option>
-                      <option>Office Expenses 1</option>
-                      <option>Office Expenses 2</option>
-                    </select>
+                    <ng-select class="form-control select2bs4" style="width: 100%" [items]="subHeads"
+                    bindLabel="subheadDesc" (change)="subHeadSelected($event)" placeholder="Select Sub Head"
+                    formControlName="subHead"> </ng-select>
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Minor Head</label>
-                    <select class="form-control select2bs4" style="width: 100%">
-                      <option selected="selected">102</option>
-                      <option>103</option>
-                      <option>104</option>
-                    </select>
+                    <input type="number" class="form-control" id="fundAvailable" readonly value={{minorHead}} />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Fund Available</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="fundAvailable"
-                      readonly
-                      value="100989898"
-                    />
+                    <input type="number" class="form-control" id="fundAvailable" readonly value={{fundAvailable}} />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Previous Allocation</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="PrevAllocation"
-                      readonly
-                      value="1234589789"
-                    />
+                    <input type="number" class="form-control" id="PrevAllocation" readonly value={{previousAllocation}} />
+
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                       <label>Allocation Type</label>
-                      <select class="form-control select2bs4" style="width: 100%">
-                        <option selected="selected">Update</option>
-                        <option>Initial</option>
-                        <option>Initial</option>
-                      </select>
+                      <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationTypes"
+                    bindLabel="allocDesc" placeholder="Select Allocation Type"
+                    formControlName="allocationType"></ng-select>
                     </div>
                   </div>
                 <div class="col-md-4">
@@ -318,24 +291,14 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Balance Fund</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="BalanceFund"
-                      readonly
-                      value="0"
-                    />
+                    <input type="text" class="form-control" id="BalanceFund" readonly value={{balanceFund}} />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                      <label>Remarks</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="PrevAllocation"
-                        placeholder="Enter Remarks"
-                      />
+                    <!-- <button type="button" class="btn btn-primary mr-2" (click)="addData()">Add</button> -->
+                <button type="submit" class="btn btn-primary mr-2">Add</button>
+                <button type="submit" class="btn btn-danger">Reset</button>
                     </div>
                   </div>
                 <div class="col-md-4 mb-3">
@@ -345,6 +308,60 @@
               </div>
               <!-- /.row -->
               <div class="row">
+                <div class="col-sm-12 mt-4">
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Batch</th>
+                          <th>F.Y.</th>
+                          <th>Unit</th>
+                          <th>Sub Head</th>
+                          <th>Bud. Type</th>
+                          <th>All. Type</th>
+                          <th>Previous</th>
+                          <th>Amount</th>
+                          <th>Remarks</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let newBudgetAllocation of newBudgetAllocationArray  | paginate :{itemsPerPage:10,currentPage:p};">
+    
+                          <td>011/2022-23</td>
+                          <td>{{newBudgetAllocation.financialYear}}</td>
+                          <td>{{newBudgetAllocation.unitName}}</td>
+                          <td>{{newBudgetAllocation.subHeadName}}</td>
+                          <td>{{newBudgetAllocation.budgetTypeName}}</td>
+                          <td>{{newBudgetAllocation.allocationTypeName}}</td>
+                          <td>{{newBudgetAllocation.prevAllocationName}}</td>
+                          <td>{{newBudgetAllocation.amount}}</td>
+                          <td>{{newBudgetAllocation.remarks}}</td>
+                        </tr>
+    
+                      </tbody>
+                    </table>
+    
+                  </div>
+                  <div class="row mt-2">
+                    <!-- <div class="col-sm-12 col-md-5">
+                      <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                        Showing 1 to 10 of {{length}} entries
+                      </div>
+                    </div> -->
+    
+    
+                    <div class="col-sm-12 col-md-12">
+                      <pagination-controls (pageChange)="p = $event" class="pagination float-right"></pagination-controls>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+        <!-- uh need to wait backchodi nai krni ha  -->
+              <form [formGroup]="saveBudgetData">
+                <div class="row">
               <div class="col-md-4">
                   <div class="form-group">
                     <label>Authority Unit</label>
@@ -405,7 +422,8 @@
           <!-- /.card-body -->
           <div class="card-footer">
             <div class="row">
-              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+              <button type="submit" class="btn btn-primary mr-2"
+              (click)="saveBudgetDataFn(saveBudgetData.value)">Submit</button>
             </div>
           </div>
         </div>

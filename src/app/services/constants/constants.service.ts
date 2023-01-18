@@ -7,7 +7,8 @@ export class ConstantsService {
   constructor() {}
 
   // serviceUrl = 'https://icg.net.in/cgwwa/'; //prod
-  serviceUrl = 'http://e20c-103-47-18-6.ngrok.io/'; //dev
+  // serviceUrl = 'http://488e-203-153-42-234.ngrok.io/'; //dev
+  serviceUrl = 'http://192.168.1.133:1111/'; //dev
 
   api = {
     getDataBudgetAllocation:
