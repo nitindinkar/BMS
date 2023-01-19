@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit{
   ngOnInit(): void {
+    $.getScript('assets/main.js');
     if (!localStorage.getItem('foo')) {
       localStorage.setItem('foo', 'no reload');
       location.reload();

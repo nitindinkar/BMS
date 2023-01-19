@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { ConstantsService } from '../services/constants/constants.service';
-
 import { CommonService } from '../services/common/common.service';
-
 import { NgxSpinnerService } from 'ngx-spinner';
-
 import Swal from 'sweetalert2';
 
 import {
@@ -129,6 +126,8 @@ export class BudgetAllocationComponent implements OnInit {
     // this.cgwwaUserDetails = JSON.parse(
     //   localStorage.getItem("cgwwaUserDetails") || ""
     // );
+    $.getScript('assets/main.js');
+
   }
 
   getDataBudgetAllocation() {

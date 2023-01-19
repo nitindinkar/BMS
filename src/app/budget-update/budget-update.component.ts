@@ -1,5 +1,6 @@
 // import { Component } from '@angular/core';
-import { Component } from '@angular/core'; //OnInit 
+import { Component } from '@angular/core';
+import * as $ from 'jquery';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { ConstantsService } from '../services/constants/constants.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -121,6 +122,8 @@ export class BudgetUpdateComponent implements OnInit {
   ngOnInit(): void {
     // this.getDataBudgetAllocation();
     this.balanceFund = 0;
+    $.getScript('assets/js/adminlte.js');
+
   }
 
   getDataBudgetAllocation() {

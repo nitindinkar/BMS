@@ -1,5 +1,6 @@
 // import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { ConstantsService } from '../services/constants/constants.service';
 import { CommonService } from '../services/common/common.service';
@@ -70,6 +71,8 @@ export class BudgetDeleteComponent implements OnInit{
     private common: CommonService
   ) {}
   ngOnInit(): void {
+    $.getScript('assets/js/adminlte.js');
+
       this.getDataBudgetAllocation();
       this.balanceFund = 0;  }
 
