@@ -1,372 +1,303 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Budget Delete</h1>
-          </div>
-          <!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Budget Delete</a></li>
-            </ol>
-          </div>
-          <!-- /.col -->
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Budget Delete</h1>
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Budget Delete</a></li>
+          </ol>
+        </div>
+        <!-- /.col -->
       </div>
-      <!-- /.container-fluid -->
+      <!-- /.row -->
     </div>
-    <!-- /.content-header -->
-  
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="card card-default">
-          <div class="card-header">
-            <h3 class="card-title">Budget Delete</h3>
-  
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-                <!-- <i class="fas fa-minus"></i> -->
-              </button>
-            </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3 class="card-title">Budget Delete</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+              <!-- <i class="fas fa-minus"></i> -->
+            </button>
           </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <form>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                          <label>Financial Year</label>
-                          <ng-select class="form-control select2bs4" style="width: 100%" [items]="budgetFinYears"
-                          bindLabel="finYear" placeholder="Select Financial Year" formControlName="finYearName">
-                        </ng-select>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label>To Unit</label>
-                          <ng-select class="form-control select2bs4" style="width: 100%" [items]="cgUnits" bindLabel="descr"
-                          (change)="getAvailableFund($event)" placeholder="Select To Unit" formControlName="cbUnit">
-                        </ng-select>
-                        </div>
-                      </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                      <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                          <thead>
-                            <tr>
-                              <th><input type="checkbox"> All</th>
-                              <th>Batch</th>
-                              <th>F.Y.</th>
-                              <th>Unit</th>
-                              <th>Sub Head</th>
-                              <th>Type</th>
-                              <th>Previous</th>
-                              <th>Amount</th>
-                              <th>Remarks</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr
-                      *ngFor="let newBudgetAllocation of newBudgetAllocationArray  | paginate :{itemsPerPage:10,currentPage:p};">
-                      <td>011/2022-23</td>
-                      <td>{{newBudgetAllocation.financialYear}}</td>
-                      <td>{{newBudgetAllocation.unitName}}</td>
-                      <td>{{newBudgetAllocation.subHeadName}}</td>
-                      <td>{{newBudgetAllocation.budgetTypeName}}</td>
-                      <td>{{newBudgetAllocation.allocationTypeName}}</td>
-                      <td>{{newBudgetAllocation.prevAllocationName}}</td>
-                      <td>{{newBudgetAllocation.amount}}</td>
-                      <td>{{newBudgetAllocation.remarks}}</td>
-                    </tr>
-
-
-                                 <tr>
-                                  <td><input type="checkbox"></td>
-                                  <td>011/2022-23</td>
-                                  <td>2022-23</td>
-                                  <td>RHQ(W)</td>
-                                  <td>Office Expenses</td>
-                                  <td>Initial</td>
-                                  <td>0</td>
-                                  <td>2100000233</td>
-                                  <td>CGHQ to RHQ</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox"></td>
-                                  <td>011/2022-23</td>
-                                  <td>2022-23</td>
-                                  <td>RHQ(W)</td>
-                                  <td>Office Expenses</td>
-                                  <td>Initial</td>
-                                  <td>0</td>
-                                  <td>2100000233</td>
-                                  <td>CGHQ to RHQ</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox"></td>
-                                  <td>011/2022-23</td>
-                                  <td>2022-23</td>
-                                  <td>RHQ(W)</td>
-                                  <td>Office Expenses</td>
-                                  <td>Initial</td>
-                                  <td>0</td>
-                                  <td>2100000233</td>
-                                  <td>CGHQ to RHQ</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox"></td>
-                                  <td>011/2022-23</td>
-                                  <td>2022-23</td>
-                                  <td>RHQ(W)</td>
-                                  <td>Office Expenses</td>
-                                  <td>Initial</td>
-                                  <td>0</td>
-                                  <td>2100000233</td>
-                                  <td>CGHQ to RHQ</td>
-                                </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="row mt-2">
-                        <div class="col-sm-12 col-md-5">
-                          <div
-                            class="dataTables_info"
-                            id="example2_info"
-                            role="status"
-                            aria-live="polite"
-                          >
-                            Showing 1 to 10 of 57 entries
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                          <div
-                            class="dataTables_paginate paging_simple_numbers"
-                            id="example2_paginate"
-                          >
-                            <ul class="pagination float-right">
-                              <li
-                                class="paginate_button page-item previous disabled"
-                                id="example2_previous"
-                              >
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="0"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >Previous</a
-                                >
-                              </li>
-                              <li class="paginate_button page-item active">
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="1"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >1</a
-                                >
-                              </li>
-                              <li class="paginate_button page-item">
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="2"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >2</a
-                                >
-                              </li>
-                              <li class="paginate_button page-item">
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="3"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >3</a
-                                >
-                              </li>
-                              <li class="paginate_button page-item">
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="4"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >4</a
-                                >
-                              </li>
-                              <li class="paginate_button page-item">
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="5"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >5</a
-                                >
-                              </li>
-                              <li class="paginate_button page-item">
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="6"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >6</a
-                                >
-                              </li>
-                              <li
-                                class="paginate_button page-item next"
-                                id="example2_next"
-                              >
-                                <a
-                                  href="#"
-                                  aria-controls="example2"
-                                  data-dt-idx="7"
-                                  tabindex="0"
-                                  class="page-link"
-                                  >Next</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Major Head</label>
-                    <input type="number" class="form-control" id="fundAvailable" readonly value={{majorHead}} />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Sub Head</label>
-                    <ng-select class="form-control select2bs4" style="width: 100%" [items]="subHeads"
-                    bindLabel="subheadDesc" (change)="subHeadSelected($event)" placeholder="Select Sub Head"
-                    formControlName="subHead" > </ng-select>
-                    
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Minor Head</label>
-                    <input type="number" class="form-control" id="fundAvailable" readonly value={{minorHead}} />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Fund Available</label>
-                    <input type="number" class="form-control" id="fundAvailable" readonly value={{fundAvailable}} />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Allocation</label>
-                    <input type="number" class="form-control" id="PrevAllocation" readonly value={{previousAllocation}} />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Allocation Type</label>
-                      <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationTypes"
-                      bindLabel="allocDesc" placeholder="Select Allocation Type"
-                      formControlName="allocationType"></ng-select>
-                    </div>
-                  </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Balance Fund</label>
-                    <input type="text" class="form-control" id="BalanceFund" readonly value={{balanceFund}} />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Remarks</label>
-                      <input type="text" class="form-control" id="PrevAllocation" placeholder="Enter Remarks"
-                      formControlName="remarks" />
-                    </div>
-                  </div>
-
-                <div class="col-md-4 upldBtn">
-                  <button type="submit" class="btn btn-danger mr-2">Delete</button>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-              <div class="row">
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <form [formGroup]="formdata" (ngSubmit)="addData(formdata.value)">
+            <div class="row">
               <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Authority Unit</label>
-                    <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationAuthorityUnits"
-                    bindLabel="descr" placeholder="Select Authority Unit"
-                    formControlName="allocationAuthorityUnits">
+                <div class="form-group">
+                  <label>Financial Year</label>
+                  <ng-select class="form-control select2bs4 " style="width: 100%" [items]="budgetFinYears"
+                    bindLabel="finYear" placeholder="Select Financial Year" formControlName="finYearName">
                   </ng-select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>To Unit</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="cgUnits" bindLabel="descr"
+                    (change)="getAvailableFund($event)" placeholder="Select To Unit" formControlName="cbUnit">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th><input type="checkbox"> All</th>
+                        <th>Batch</th>
+                        <th>F.Y.</th>
+                        <th>Unit</th>
+                        <th>Sub Head</th>
+                        <th>Type</th>
+                        <th>Previous</th>
+                        <th>Amount</th>
+                        <th>Remarks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let newBudgetAllocation of newBudgetAllocationArray  | paginate :{itemsPerPage:10,currentPage:p};">
+                        <td>011/2022-23</td>
+                        <td>{{newBudgetAllocation.financialYear}}</td>
+                        <td>{{newBudgetAllocation.unitName}}</td>
+                        <td>{{newBudgetAllocation.subHeadName}}</td>
+                        <td>{{newBudgetAllocation.budgetTypeName}}</td>
+                        <td>{{newBudgetAllocation.allocationTypeName}}</td>
+                        <td>{{newBudgetAllocation.prevAllocationName}}</td>
+                        <td>{{newBudgetAllocation.amount}}</td>
+                        <td>{{newBudgetAllocation.remarks}}</td>
+                      </tr>
+
+
+                      <tr>
+                        <td><input type="checkbox"></td>
+                        <td>011/2022-23</td>
+                        <td>2022-23</td>
+                        <td>RHQ(W)</td>
+                        <td>Office Expenses</td>
+                        <td>Initial</td>
+                        <td>0</td>
+                        <td>2100000233</td>
+                        <td>CGHQ to RHQ</td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox"></td>
+                        <td>011/2022-23</td>
+                        <td>2022-23</td>
+                        <td>RHQ(W)</td>
+                        <td>Office Expenses</td>
+                        <td>Initial</td>
+                        <td>0</td>
+                        <td>2100000233</td>
+                        <td>CGHQ to RHQ</td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox"></td>
+                        <td>011/2022-23</td>
+                        <td>2022-23</td>
+                        <td>RHQ(W)</td>
+                        <td>Office Expenses</td>
+                        <td>Initial</td>
+                        <td>0</td>
+                        <td>2100000233</td>
+                        <td>CGHQ to RHQ</td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox"></td>
+                        <td>011/2022-23</td>
+                        <td>2022-23</td>
+                        <td>RHQ(W)</td>
+                        <td>Office Expenses</td>
+                        <td>Initial</td>
+                        <td>0</td>
+                        <td>2100000233</td>
+                        <td>CGHQ to RHQ</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                      Showing 1 to 10 of 57 entries
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                      <ul class="pagination float-right">
+                        <li class="paginate_button page-item previous disabled" id="example2_previous">
+                          <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
+                            class="page-link">Previous</a>
+                        </li>
+                        <li class="paginate_button page-item active">
+                          <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                        </li>
+                        <li class="paginate_button page-item">
+                          <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                        </li>
+                        <li class="paginate_button page-item">
+                          <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                        </li>
+                        <li class="paginate_button page-item">
+                          <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                        </li>
+                        <li class="paginate_button page-item">
+                          <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                        </li>
+                        <li class="paginate_button page-item">
+                          <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                        </li>
+                        <li class="paginate_button page-item next" id="example2_next">
+                          <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Authority</label>
-                    <input type="text" class="form-control" id="BalanceFund" placeholder="Enter Authority"
+                <div class="form-group">
+                  <label>Major Head</label>
+                  <input type="number" class="form-control" id="fundAvailable" readonly value={{majorHead}} />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Sub Head</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="subHeads"
+                    bindLabel="subheadDesc" (change)="subHeadSelected($event)" placeholder="Select Sub Head"
+                    formControlName="subHead"> </ng-select>
+
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Minor Head</label>
+                  <input type="number" class="form-control" id="fundAvailable" readonly value={{minorHead}} />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Fund Available</label>
+                  <input type="number" class="form-control" id="fundAvailable" readonly value={{fundAvailable}} />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Allocation</label>
+                  <input type="number" class="form-control" id="PrevAllocation" readonly value={{previousAllocation}} />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Allocation Type</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationTypes"
+                    bindLabel="allocDesc" placeholder="Select Allocation Type"
+                    formControlName="allocationType"></ng-select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Balance Fund</label>
+                  <input type="text" class="form-control" id="BalanceFund" readonly value={{balanceFund}} />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Remarks</label>
+                  <input type="text" class="form-control" id="PrevAllocation" placeholder="Enter Remarks"
+                    formControlName="remarks" />
+                </div>
+              </div>
+
+              <div class="col-md-4 upldBtn">
+                <button type="submit" class="btn btn-danger mr-2">Delete</button>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Authority Unit</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="allocationAuthorityUnits"
+                    bindLabel="descr" placeholder="Select Authority Unit" formControlName="allocationAuthorityUnits">
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Authority</label>
+                  <input type="text" class="form-control" id="BalanceFund" placeholder="Enter Authority"
                     formControlName="authorityName" />
-                  </div>
                 </div>
+              </div>
               <div class="col-md-4">
-                  <div class="form-group">
-                    <input type="date" class="form-control" id="Date" placeholder="Enter Date"
+                <div class="form-group">
+                  <input type="date" class="form-control" id="Date" placeholder="Enter Date"
                     formControlName="budgetDate" />
-                  </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Type</label>
-                    <ng-select class="form-control select2bs4" style="width: 100%" [items]="authorityTypes"
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Type</label>
+                  <ng-select class="form-control select2bs4" style="width: 100%" [items]="authorityTypes"
                     bindLabel="allocType" placeholder="Select Type" formControlName="authorityTypes">
                   </ng-select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Browse Document</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="exampleInputFile" (change)="onChangeFile($event)">
-                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 upldBtn">
-                  <button type="submit" class="btn btn-primary" (click)="uploadFile()">Upload</button>
                 </div>
               </div>
-            </form>
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <div class="row">
-              <button type="submit" class="btn btn-primary mr-2"
-              (click)="saveBudgetDataFn(saveBudgetData.value)">Submit</button>            </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Browse Document</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile" (change)="onChangeFile($event)">
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 upldBtn">
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <!-- <button type="submit" class="btn btn-primary" (click)="uploadFile()">Upload</button> -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="row">
+            <button type="submit" class="btn btn-primary mr-2"
+              (click)="saveBudgetDataFn(saveBudgetData.value)">Submit</button>
           </div>
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
-    </section>
-  
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

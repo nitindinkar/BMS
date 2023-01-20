@@ -127,7 +127,6 @@ export class BudgetAllocationComponent implements OnInit {
     //   localStorage.getItem("cgwwaUserDetails") || ""
     // );
     $.getScript('assets/main.js');
-
   }
 
   getDataBudgetAllocation() {
@@ -285,11 +284,12 @@ export class BudgetAllocationComponent implements OnInit {
           this.newBudgetAllocationList[i].finYearName.serialNo,
         budgetBatchNo: '001',
         toUnitId: this.newBudgetAllocationList[i].cbUnit.cbUnit,
-        subHeadId: this.newBudgetAllocationList[i].subHead.id,
+        subHeadId: this.newBudgetAllocationList[i].subHead.subheadId,
         amount: this.newBudgetAllocationList[i].amount,
         remark: this.newBudgetAllocationList[i].remarks,
         budgetTypeId: this.newBudgetAllocationList[i].budgetType.id,
-        allocationTypeId: this.newBudgetAllocationList[i].allocationType.id,
+        allocationTypeId:
+          this.newBudgetAllocationList[i].allocationType.allocId,
       });
       this.submitJson = {
         listData: newBudgetAllocationListSubArray,
